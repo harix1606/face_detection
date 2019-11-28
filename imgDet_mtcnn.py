@@ -3,6 +3,9 @@ from matplotlib import pyplot
 from matplotlib.patches import Rectangle
 from mtcnn.mtcnn import MTCNN
 
+from tkinter import filedialog
+from tkinter import *
+
 # draw an image with detected objects
 def draw_image_with_boxes(filename, result_list):
 	# load the image
@@ -21,8 +24,11 @@ def draw_image_with_boxes(filename, result_list):
 		ax.add_patch(rect)
 	# show the plot
 	pyplot.show()
+ 
+root = Tk()
+filename = filedialog.askopenfilename(initialdir = '.', title = 'Select Image', filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
+root.destroy()
 
-filename = 'img_493.jpg'
 # load image from file
 pixels = pyplot.imread(filename)
 # create the detector, using default weights
@@ -31,3 +37,4 @@ detector = MTCNN()
 faces = detector.detect_faces(pixels)
 # display faces on the original image
 draw_image_with_boxes(filename, faces)
+
